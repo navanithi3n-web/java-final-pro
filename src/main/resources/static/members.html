@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members – IronPulse</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main-content">
+        <div class="top-header">
+            <div class="header-title"><h1>Members</h1><p>Manage gym members</p></div>
+            <div id="user-badge"></div>
+        </div>
+        <div class="flex-between mb-3" style="flex-wrap:wrap; gap:0.75rem;">
+            <input type="text" id="member-search" class="form-control search-input" placeholder="Search by name or phone…">
+            <a href="/members/new" class="btn btn-primary">+ Register Member</a>
+        </div>
+        <div class="card">
+            <div class="card-body p-0"><div class="table-responsive">
+                <table class="data-table">
+                    <thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Email</th><th>Joined</th><th></th></tr></thead>
+                    <tbody id="members-tbody"><tr><td colspan="6" class="text-center text-muted">Loading…</td></tr></tbody>
+                </table>
+            </div></div>
+        </div>
+    </main>
+</div>
+<script src="/js/api.js"></script><script src="/js/auth.js"></script><script src="/js/layout.js"></script><script src="/js/members.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initMembersList);</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users – IronPulse</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main-content">
+        <div class="top-header">
+            <div class="header-title"><h1>User Management</h1><p>System users and roles (Admin only)</p></div>
+            <div id="user-badge"></div>
+        </div>
+        <div id="users-content">
+            <div class="grid-2-col">
+                <div class="card">
+                    <div class="card-header"><h3>Create New User</h3></div>
+                    <div class="card-body">
+                        <div class="login-error" id="form-error" style="display:none; background:var(--red-light); color:var(--red); border-left:4px solid var(--red); padding:0.75rem 1rem; border-radius:var(--radius-sm); font-weight:600; margin-bottom:1rem;"></div>
+                        <form id="user-form">
+                            <div class="form-group">
+                                <label for="field-username">Username <span class="required">*</span></label>
+                                <input type="text" id="field-username" class="form-control" placeholder="e.g. jsmith" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="field-password">Password <span class="required">*</span></label>
+                                <input type="password" id="field-password" class="form-control" placeholder="Enter password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="field-fullname">Full Name <span class="required">*</span></label>
+                                <input type="text" id="field-fullname" class="form-control" placeholder="e.g. John Smith" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="field-role">Role <span class="required">*</span></label>
+                                <select id="field-role" class="form-control" required>
+                                    <option value="STAFF">STAFF (Front Desk)</option>
+                                    <option value="ADMIN">ADMIN (Full Access)</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Create User</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3>Existing Accounts</h3></div>
+                    <div class="card-body p-0"><div class="table-responsive">
+                        <table class="data-table">
+                            <thead><tr><th>ID</th><th>Username</th><th>Full Name</th><th>Role</th><th>Enabled</th><th>Created</th></tr></thead>
+                            <tbody id="users-tbody"><tr><td colspan="6" class="text-center text-muted">Loading…</td></tr></tbody>
+                        </table>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="/js/api.js"></script><script src="/js/auth.js"></script><script src="/js/layout.js"></script><script src="/js/users.js"></script>
+</body>
+</html>

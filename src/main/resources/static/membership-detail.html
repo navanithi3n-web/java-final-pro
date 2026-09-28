@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Detail – IronPulse</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main-content">
+        <div class="top-header">
+            <div class="header-title">
+                <p class="breadcrumb"><a href="/memberships">Memberships</a> › <span id="breadcrumb-name">…</span></p>
+                <h1>Membership Details</h1>
+            </div>
+            <div id="user-badge"></div>
+        </div>
+        <div id="membership-detail">
+            <div class="grid-2-col">
+                <div class="card">
+                    <div class="card-header"><h3>Membership Info</h3></div>
+                    <div class="card-body">
+                        <p><strong>Member:</strong> <span id="detail-member">–</span></p>
+                        <p><strong>Current Plan:</strong> <span id="detail-plan">–</span></p>
+                        <p><strong>Start Date:</strong> <span id="detail-start">–</span></p>
+                        <p><strong>Expiry Date:</strong> <span id="detail-expiry">–</span></p>
+                        <p><strong>Status:</strong> <span id="detail-status" class="badge">–</span></p>
+                        <p><strong>Remaining:</strong> <span id="detail-days">–</span></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3>Renew Membership</h3></div>
+                    <div class="card-body">
+                        <div class="login-error" id="renew-error" style="display:none; background:var(--red-light); color:var(--red); border-left:4px solid var(--red); padding:0.75rem 1rem; border-radius:var(--radius-sm); font-weight:600; margin-bottom:1rem;"></div>
+                        <form id="renew-form">
+                            <div class="form-group">
+                                <label for="renew-plan">Select New Plan <span class="required">*</span></label>
+                                <select id="renew-plan" class="form-control" required></select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">🔄 Renew Now</button>
+                                <a href="/memberships" class="btn btn-secondary">Back to Memberships</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="/js/api.js"></script><script src="/js/auth.js"></script><script src="/js/layout.js"></script><script src="/js/memberships.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initMembershipDetail);</script>
+</body>
+</html>

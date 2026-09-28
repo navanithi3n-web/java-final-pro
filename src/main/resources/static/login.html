@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In – IronPulse</title>
+    <meta name="description" content="Sign in to IronPulse Gym Membership & Attendance Tracker">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--surface-alt); }
+        .login-card { width: 100%; max-width: 420px; background: var(--surface); border: 1px solid var(--border); border-top: 4px solid var(--blue); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 2.5rem 2rem; }
+        .login-brand { text-align: center; margin-bottom: 2rem; }
+        .login-brand-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--blue), var(--red)); border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 0.75rem; box-shadow: 0 4px 14px rgba(30,79,216,0.25); }
+        .login-brand h1 { font-size: 1.5rem; font-weight: 800; color: var(--text); }
+        .login-brand p { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem; }
+        .login-error { background: var(--red-light); color: var(--red); border-left: 4px solid var(--red); padding: 0.75rem 1rem; border-radius: var(--radius-sm); font-size: 0.88rem; font-weight: 600; margin-bottom: 1rem; display: none; }
+        .pwd-toggle { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 1.1rem; padding: 0.25rem; }
+        .pwd-wrapper { position: relative; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="login-brand">
+            <div class="login-brand-icon">🏋️</div>
+            <h1>IronPulse</h1>
+            <p>Sign in to continue</p>
+        </div>
+
+        <div class="login-error" id="login-error"></div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="Enter username" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="pwd-wrapper">
+                    <input type="password" id="password" class="form-control" placeholder="Enter password" required>
+                    <button type="button" class="pwd-toggle" id="pwd-toggle" title="Show password">👁️</button>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg" id="login-btn" style="margin-top: 1.25rem;">Sign In</button>
+        </form>
+    </div>
+
+    <script>
+        // If already logged in, redirect to dashboard
+        fetch('/api/auth/me', { credentials: 'same-origin' }).then(r => {
+            if (r.ok) window.location.href = '/dashboard';
+        });
+
+        // Show/Hide password
+        document.getElementById('pwd-toggle').addEventListener('click', () => {
+            const inp = document.getElementById('password');
+            const isPassword = inp.type === 'password';
+            inp.type = isPassword ? 'text' : 'password';
+            document.getElementById('pwd-toggle').textContent = isPassword ? '🙈' : '👁️';
+        });
+
+        // Submit
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errEl = document.getElementById('login-error');
+            errEl.style.display = 'none';
+            const btn = document.getElementById('login-btn');
+            btn.disabled = true; btn.textContent = 'Signing in…';
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        username: document.getElementById('username').value,
+                        password: document.getElementById('password').value
+                    })
+                });
+                if (res.ok) {
+                    window.location.href = '/dashboard';
+                } else {
+                    const data = await res.json();
+                    errEl.textContent = data.message || 'Invalid credentials';
+                    errEl.style.display = 'block';
+                }
+            } catch (err) {
+                errEl.textContent = 'Network error. Please try again.';
+                errEl.style.display = 'block';
+            }
+            btn.disabled = false; btn.textContent = 'Sign In';
+        });
+    </script>
+</body>
+</html>

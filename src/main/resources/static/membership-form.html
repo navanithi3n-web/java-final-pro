@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Membership – IronPulse</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main-content">
+        <div class="top-header">
+            <div class="header-title">
+                <p class="breadcrumb"><a href="/memberships">Memberships</a> › <span>Assign</span></p>
+                <h1>Assign Membership</h1>
+            </div>
+            <div id="user-badge"></div>
+        </div>
+        <div class="card" style="max-width:560px;">
+            <div class="card-body">
+                <div class="login-error" id="form-error" style="display:none; background:var(--red-light); color:var(--red); border-left:4px solid var(--red); padding:0.75rem 1rem; border-radius:var(--radius-sm); font-weight:600; margin-bottom:1rem;"></div>
+                <form id="membership-form">
+                    <div class="form-group">
+                        <label for="field-member">Member <span class="required">*</span></label>
+                        <select id="field-member" class="form-control" required>
+                            <option value="">Loading members…</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="field-plan">Membership Plan <span class="required">*</span></label>
+                        <select id="field-plan" class="form-control" required>
+                            <option value="">Loading plans…</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="field-start-date">Start Date (Optional, defaults to today)</label>
+                        <input type="date" id="field-start-date" class="form-control">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Assign Membership</button>
+                        <a href="/memberships" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="/js/api.js"></script><script src="/js/auth.js"></script><script src="/js/layout.js"></script><script src="/js/memberships.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initMembershipForm);</script>
+</body>
+</html>

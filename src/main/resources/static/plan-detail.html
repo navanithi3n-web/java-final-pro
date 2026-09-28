@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Detail – IronPulse</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main-content">
+        <div class="top-header">
+            <div class="header-title">
+                <p class="breadcrumb"><a href="/plans">Plans</a> › <span id="breadcrumb-name">…</span></p>
+                <h1>Plan Details</h1>
+            </div>
+            <div id="user-badge"></div>
+        </div>
+        <div id="plan-detail">
+            <div class="grid-2-col">
+                <div class="card">
+                    <div class="card-header"><h3>Plan Overview</h3></div>
+                    <div class="card-body">
+                        <p><strong>Plan Name:</strong> <span id="detail-name">–</span></p>
+                        <p><strong>Duration:</strong> <span id="detail-duration">–</span></p>
+                        <p><strong>Price:</strong> <span id="detail-price">–</span></p>
+                        <p><strong>Active Subscriptions:</strong> <span id="detail-usage-count" class="badge badge-primary">0</span></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3>Edit Plan</h3></div>
+                    <div class="card-body">
+                        <div class="login-error" id="edit-error" style="display:none; background:var(--red-light); color:var(--red); border-left:4px solid var(--red); padding:0.75rem 1rem; border-radius:var(--radius-sm); font-weight:600; margin-bottom:1rem;"></div>
+                        <form id="plan-edit-form">
+                            <div class="form-group">
+                                <label for="edit-name">Plan Name <span class="required">*</span></label>
+                                <input type="text" id="edit-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-duration">Duration (Days) <span class="required">*</span></label>
+                                <input type="number" id="edit-duration" class="form-control" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-price">Price (₹) <span class="required">*</span></label>
+                                <input type="number" id="edit-price" class="form-control" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Update Plan</button>
+                                <a href="/plans" class="btn btn-secondary">Back to Plans</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="/js/api.js"></script><script src="/js/auth.js"></script><script src="/js/layout.js"></script><script src="/js/plans.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initPlanDetail);</script>
+</body>
+</html>
